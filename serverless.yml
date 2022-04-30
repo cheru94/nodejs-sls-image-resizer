@@ -1,0 +1,34 @@
+service: nodejs-sls-image-resizer
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  architecture: arm64
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+
+package:
+  exclude:
+    - .gitignore
+    - .npmignore
+    - .package-lock.json
+    - node_modules/aws_sdk/**
+    - .vscode/*
+    - .github/*
+    - template.yaml
+    - test/*
+
+# custom:
+
+functions:
+  resizeLambda:
+    handler: src/resize/application/rezise.handler
+    name: ${self:service}-${self:provider.stage}-request-function
+    events:
+      - httpApi:
+          method: post
+          path: /resize/images      
+   

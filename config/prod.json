@@ -1,0 +1,7 @@
+{
+  "RequestFunction": {
+    "lambdaFunctionName": "requestLambdaFunction"
+  },
+  "ExecutorFunction": {},
+  "ResponseFunction": {}
+}
