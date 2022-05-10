@@ -1,17 +1,19 @@
 service: nodejs-sls-image-resizer
 
 plugins:
+  - serverless-s3-local
   - serverless-offline
   - serverless-iam-roles-per-function
 
 provider:
   name: aws
-  architecture: arm64
+  # architecture: x86
   runtime: nodejs14.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
 
 package:
+  individually: true
   exclude:
     - .gitignore
     - .npmignore
@@ -23,30 +25,33 @@ package:
     - test/*
     - images
 
-# custom:
+custom:
+  s3:
+    address: localhost
+    host: localhost
+    directory: /tmp
 
 functions:
   resizerImages:
     handler: src/resizer/application/resizerHandler.handler
     name: ${self:service}-${self:provider.stage}-resizer-function
-    iam:
-      role:
-        - Effect: Allow
-          Action:
-            - s3:putObject
-          Resource:
-            - !GetAtt ImageS3Bucket.Arn
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - s3:putObject
+        Resource:
+          - !GetAtt ImageS3Bucket.Arn
     events:
       - httpApi:
           method: post
           path: /resizer
     environment:
-      IMAGE_BUCKET: !GetAtt ImageS3Bucket.Arn
+      IMAGE_BUCKET: !Ref ImageS3Bucket
   getBufferFromImage:
     handler: src/buffer/application/bufferHandler.handler
     name: ${self:service}-${self:provider.stage}-getBuffer-function
     events:
-      - httpApi:
+      - http:
           method: get
           path: /buffer
 
@@ -54,3 +59,5 @@ resources:
   Resources:
     ImageS3Bucket:
       Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:service}-${self:provider.stage}-bucket

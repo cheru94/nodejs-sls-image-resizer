@@ -1,4 +1,3 @@
-
 const domainService = require('../domain/resizerService');
 
 // headers in order to set CORSS policies
@@ -15,7 +14,7 @@ module.exports.handler = async (command, meta) => {
     const domainResponse = await domainService(bufferImage);
     return {
       statusCode: 200,
-      body: domainResponse,
+      body: JSON.stringify(domainResponse),
       headers,
     };
   } catch (error) {

@@ -1,4 +1,3 @@
-
 const domainService = require('../domain/bufferService');
 
 // headers in order to set CORSS policies
