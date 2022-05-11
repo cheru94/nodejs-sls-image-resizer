@@ -40,6 +40,7 @@ npm run lint:fix
 4. Pipelines with Github Actions in order to deploy with Github Secrets into AWS
 5. Infrastructure as Code using Serverless Framework
 6. Swagger API Docs 2.0
+7. Local environment using serverless-offline & serverless-s3-local
 
 ## API Baselines
 
