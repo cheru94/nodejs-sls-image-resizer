@@ -5,21 +5,19 @@
 ## Introduction
 
 
-This is a Serverless Image resizer
-
+This is a Serverless Image resizer that uses Serverless resources of AWS.
 
 ## Requirements
 
 - NodeJS version 14.xx or greater
 - Understanding Domain Driven Designs
-- SAM to deploy in AWS
-
-
+- Serverless Framework to deploy in AWS
 
 ## How to run Locally
 
+```
+npm i
 
- ```
 npm run start:dev
 ```
 

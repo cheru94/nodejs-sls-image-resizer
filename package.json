@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1130.0",
+    "file-size": "^1.0.0",
     "sharp": "^0.30.4",
     "uuid": "^8.3.2"
   },

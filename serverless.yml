@@ -41,7 +41,7 @@ functions:
         Resource:
           - !GetAtt ImageS3Bucket.Arn
     events:
-      - httpApi:
+      - http:
           method: post
           path: /resizer
   getBufferFromImage:
