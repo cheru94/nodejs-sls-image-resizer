@@ -1,23 +1,25 @@
 /* eslint-disable no-use-before-define */
 const sharp = require('sharp');
 const fileSize = require('file-size');
+
 const { uploadFile } = require('../services/bucket/imageBucketService');
 const resizerEntity = require('./resizerEntity');
+const CustomError = require('../utils/CustomError');
 
 module.exports = async (base64, sizes) => {
   const originalImageBuffer = Buffer.from(base64, 'base64');
-  validateFile(originalImageBuffer);
+  await validateFile(originalImageBuffer);
   const cropedImages = await cropImages(originalImageBuffer, sizes);
   const uploadedFileResponse = await uploadFiles(cropedImages);
   const domainResponse = resizerEntity(uploadedFileResponse);
-  return domainResponse;
+  return { statusCode: 200, body: domainResponse };
 };
 
 const validateFile = async (originalImageBuffer) => {
   const { format, size } = await sharp(originalImageBuffer).metadata();
-  if (format && !(format === 'jpeg' || format === 'png')) throw { statusCode: 400, code: 'BAD_REQUEST', message: 'File has a not valid extension' };
+  if (format && !(format === 'jpeg' || format === 'png')) throw new CustomError({ statusCode: 400, code: 'BAD_REQUEST', message: 'File has a not valid extension' });
   const mbSize = fileSize(size).to('MB');
-  if (Number(mbSize) > 5) throw { statusCode: 400, code: 'BAD_REQUEST', message: 'File is too heavy' };
+  if (Number(mbSize) > 5) throw new CustomError({ statusCode: 400, code: 'BAD_REQUEST', message: 'File is too heavy' });
   return format;
 };
 
