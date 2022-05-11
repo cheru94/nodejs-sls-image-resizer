@@ -76,7 +76,7 @@ In this case we choosed to use Serverless Framework
     sls deploy
     ```
 
-3. Note the outputs from the serverless deployment process. These contain the resource names and/or URL's that were created.
+2. Note the outputs from the serverless deployment process. These contain the resource names and/or URL's that were created.
 
 ## Cleanup
 
