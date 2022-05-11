@@ -101,3 +101,4 @@ Mainly based in:
 - SOLID Principles
 
 
+![imagePoC-high level drawio](https://user-images.githubusercontent.com/8229412/167815385-d078dfb3-4b42-4da4-ac45-caec9814326e.png)
