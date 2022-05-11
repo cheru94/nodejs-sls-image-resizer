@@ -31,20 +31,26 @@ npm run lint:fix
 ```
 
 
-## How to manually test the funcionality 
+## What does this repo give us ?
 
 
-TBD
+1. REST Endpoint `[POST] {{BASE_DOMAIN}}/dev/resizer`
+2. Lambda Function that process an image with new sizes from a static list.
+3. S3 Bucket in order to storage the resized image
+4. Pipelines with Github Actions in order to deploy with Github Secrets into AWS
+5. Infrastructure as Code using Serverless Framework
 
+## API Baselines
 
-## Architecture
+The API ONLY accept PNG and JPEG files
 
-Mainly based in:
+The API rejects input file bigger than 5mb
 
-- Domain Driven Design (Eric Evans)
-- Onion Architecture (Jeffrey Palermo)
-- Clean Architecture (Robert C Martin)
-- SOLID Principles
+The API returns with the user 3 new images with the following dimensions
+- 400x300
+- 160x120
+- 120x120
+
 
 
 ## Folder structure
@@ -59,7 +65,6 @@ src
 ├── package.json
 ├── serverless.yml (serverless config)
 ```
-
 
 ## How to Deploy 
 
@@ -83,3 +88,14 @@ In this case we choosed to use Serverless Framework
     ```bash
     aws cloudformation list-stacks --query "StackSummaries[?contains(StackName,<STACK_NAME>)].StackStatus"
     ```
+
+## Architecture
+
+Mainly based in:
+
+- Domain Driven Design (Eric Evans)
+- Onion Architecture (Jeffrey Palermo)
+- Clean Architecture (Robert C Martin)
+- SOLID Principles
+
+
