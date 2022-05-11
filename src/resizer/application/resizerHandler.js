@@ -1,5 +1,5 @@
 const domainService = require('../domain/resizerService');
-
+const sizes = require('../utils/sizes.constants');
 // headers in order to set CORSS policies
 // Lambda sends the headers into the APIGW method Response & to the client.
 const headers = {
@@ -11,7 +11,7 @@ module.exports.handler = async (command, meta) => {
   try {
     const { body } = command;
     const { bufferImage } = JSON.parse(body);
-    const domainResponse = await domainService(bufferImage);
+    const domainResponse = await domainService(bufferImage, sizes);
     return {
       statusCode: 200,
       body: JSON.stringify(domainResponse),

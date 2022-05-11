@@ -1,6 +1,6 @@
 const { S3, Endpoint } = require('aws-sdk');
 
-const uploadFile = async (file1) => {
+const uploadFile = async (file, name) => {
   const s3 = new S3(process.env.IS_OFFLINE ? {
     s3ForcePathStyle: true,
     accessKeyId: 'S3RVER', // This specific key is required when working offline
@@ -12,8 +12,8 @@ const uploadFile = async (file1) => {
     ContentEncoding: 'base64',
     ContentType: 'image/jpeg',
     Bucket: 'nodejs-sls-image-resizer-dev-bucket',
-    Key: 'MY_IMAGE.jpeg',
-    Body: file1,
+    Key: name,
+    Body: file,
     ACL: 'public-read',
   };
   console.log(params.Bucket);

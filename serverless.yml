@@ -7,7 +7,6 @@ plugins:
 
 provider:
   name: aws
-  # architecture: x86
   runtime: nodejs14.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
@@ -45,8 +44,6 @@ functions:
       - httpApi:
           method: post
           path: /resizer
-    environment:
-      IMAGE_BUCKET: !Ref ImageS3Bucket
   getBufferFromImage:
     handler: src/buffer/application/bufferHandler.handler
     name: ${self:service}-${self:provider.stage}-getBuffer-function
