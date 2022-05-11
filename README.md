@@ -39,6 +39,7 @@ npm run lint:fix
 3. S3 Bucket in order to storage the resized image
 4. Pipelines with Github Actions in order to deploy with Github Secrets into AWS
 5. Infrastructure as Code using Serverless Framework
+6. Swagger API Docs 2.0
 
 ## API Baselines
 
