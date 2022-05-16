@@ -1,0 +1,55 @@
+{
+  "name": "nodejs-rest-api-sls-ddd",
+  "version": "1.0.0",
+  "description": "nodeJS Rest API with Serverless Framework & Domain Driven Design",
+  "scripts": {
+    "boot-load": "npm i && npx husky install",
+    "deploy": "sls deploy",
+    "start:dev": "sls offline start",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^6.0.0",
+    "jest": "^27.5.1",
+    "jest-html-reporters": "^3.0.6",
+    "prettier": "^2.2.1",
+    "serverless": "^3.7.1",
+    "serverless-compose": "^2.4.0",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-s3-local": "^0.6.22"
+  },
+  "dependencies": {
+    "aws-cdk": "^2.24.1",
+    "aws-sdk": "^2.1130.0",
+    "file-size": "^1.0.0",
+    "sharp": "^0.30.4",
+    "uuid": "^8.3.2"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverageFrom": [
+      "src/request/domain/*.{js,jsx}",
+      "!<rootDir>/node_modules/",
+      "!<rootDir>/path/to/dir/"
+    ],
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporters",
+        {
+          "pageTitle": "Test Report"
+        }
+      ]
+    ]
+  }
+}
